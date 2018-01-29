@@ -5,7 +5,7 @@ docker run -it --rm \
   -v "$HOME/.ivy2:/root/.ivy2" \
   -v "$HOME/.sbt:/root/.sbt" \
   -v "$HOME/.coursier:/root/.coursier" \
-  jmcclell/docker-sbt:latest \
+  jmcclell/sbt-dev-docker:latest \
   "$@"
   
 

@@ -1,6 +1,6 @@
+#----
 # SBT CLI Container
 FROM openjdk:8-jdk-alpine3.7
-MAINTAINER Jason McClellan <jason@jasonmcclellan.io>
 
 RUN set -x \
     && apk --no-cache update \
@@ -27,7 +27,11 @@ RUN set -x \
     && apk del build-dependencies
 
 #----
-# Default command options/env
-ENV SBT_OPTS -Xmx1G -XX:+UseG1GC  -Xss1M -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap 
-WORKDIR /workspace
+# Setup Workspace
+ENV BUILD_DIR /workspace
+WORKDIR $BUILD_DIR
+
+#----
+# Setup our entrypoint
+ENV SBT_OPTS "-Xmx1G -Xss2M"
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/sbt"]
